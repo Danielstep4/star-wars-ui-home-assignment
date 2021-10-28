@@ -7,6 +7,10 @@ module.exports = {
         starWars: "#FFE81F",
         bgPrimary: "0E1111",
       },
+      fontFamily: {
+        pollorOne: ["Poller One", "cursive"],
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
   },
   variants: {
