@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         starWars: "#FFE81F",
-        bgPrimary: "0E1111",
+        bgPrimary: "#0E1111",
       },
       fontFamily: {
         pollorOne: ["Poller One", "cursive"],
