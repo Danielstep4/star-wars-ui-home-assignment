@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
         </button>
       )}
       <aside
-        className={`min-h-screen flex flex-col bg-bgPrimary border-r-2 border-starWars  ${
+        className={`h-screen flex flex-col bg-bgPrimary border-r-2 border-starWars  ${
           isMobileNavOpen ? "w-screen absolute" : "lg:block hidden w-1/3"
         }`}
       >
@@ -33,9 +33,40 @@ const Sidebar: React.FC = () => {
             The Star Wars API
           </h1>
         </div>
+        {getAllMoviesNames().map((movie) => (
+          <SidebarMovieLink {...movie} key={movie.episodeId} />
+        ))}
       </aside>
     </>
   );
 };
 
+const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
+  episodeId,
+  title,
+  isFavorite,
+}) => {
+  const { setNewFavoriteMovie, removeFavoriteMovie } = useMovies();
+  const handleHeartClick = () =>
+    isFavorite
+      ? removeFavoriteMovie(episodeId)
+      : setNewFavoriteMovie(episodeId);
+
+  return (
+    <div className="border-b-2 border-starWars py-5 px-2 flex justify-between items-baseline cursor-pointer">
+      <span className="text-starWars text-sm select-none font-pollorOne font-bold block">
+        Star Wars: {title}
+      </span>
+      <span
+        className="text-white hover:transform hover:scale-110"
+        onClick={handleHeartClick}
+      >
+        {isFavorite ? "unHeart" : "Heart"}
+      </span>
+    </div>
+  );
+};
+
 export default Sidebar;
+
+interface SidebarMovieLinkProps extends MovieName {}

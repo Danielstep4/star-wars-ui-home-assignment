@@ -9,7 +9,7 @@ const MovieDetails: React.FC = () => {
       rgba(45, 52, 54, 0.2)
     ),url(${bgImage})`,
       }}
-      className="min-h-screen bg-cover bg-opacity-75 w-screen"
+      className="h-screen bg-cover bg-opacity-75 w-screen"
     >
       Hello World
     </section>
