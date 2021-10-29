@@ -1,5 +1,14 @@
 /// <reference types="react-scripts" />
 
+interface MovieName {
+  title: string;
+  episodeId: number;
+  isFavorite: boolean;
+}
+
+interface FavoriteMovie {
+  episodeId: number;
+}
 interface SwapiMoviesResult {
   title: string;
   episode_id: number;

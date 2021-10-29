@@ -14,6 +14,8 @@ module.exports = {
     },
   },
   variants: {
+    scale: ["hover"],
+    transform: ["hover"],
     extend: {},
   },
   plugins: [],
