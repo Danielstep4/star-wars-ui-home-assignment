@@ -1,6 +1,9 @@
 import bgImage from "../../assets/starwars-bg.jpg";
+import { useMovies } from "../../context/MovieContext";
 
 const MovieDetails: React.FC = () => {
+  const { currentMovie } = useMovies();
+  console.log(currentMovie);
   return (
     <section
       style={{
@@ -8,11 +11,11 @@ const MovieDetails: React.FC = () => {
       rgba(45, 52, 54, 0.2),
       rgba(45, 52, 54, 0.2)
     ),url(${bgImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
       }}
-      className="h-screen bg-cover bg-opacity-75 w-screen"
-    >
-      Hello World
-    </section>
+      className="min-h-screen h-full w-screen p-10"
+    ></section>
   );
 };
 
