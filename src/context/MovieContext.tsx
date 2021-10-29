@@ -20,8 +20,9 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
   useEffect(() => {
     const data = localStorage.getItem("favoriteMovies");
     if (data) {
-      const favoriteMovies = JSON.parse(data);
-      if (Array.isArray(favoriteMovies)) setFavoriteMovies(favoriteMovies);
+      const cachedFavoriteMovies = JSON.parse(data);
+      if (Array.isArray(cachedFavoriteMovies))
+        setFavoriteMovies(cachedFavoriteMovies);
     }
   }, []);
   /** Every time the user updates favorite Movies state the use effect will save it in localStorage */
@@ -30,7 +31,7 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
       localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
       toggleUpdateLocalStorage();
     }
-  }, [updateLocalStorage]);
+  }, [updateLocalStorage, favoriteMovies, toggleUpdateLocalStorage]);
   // Helper functions
   /** Returns one movie by episode id or undefined */
   const _findOneMovieByEpisodeId = (episodeId: number) => {

@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
         </button>
       )}
       <aside
-        className={`h-screen flex flex-col bg-bgPrimary border-r-2 border-starWars  ${
+        className={`min-h-screen h-full flex flex-col bg-bgPrimary border-r-2 border-starWars  ${
           isMobileNavOpen ? "w-screen absolute" : "lg:block hidden w-1/3"
         }`}
       >
