@@ -46,19 +46,23 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
   title,
   isFavorite,
 }) => {
-  const { setNewFavoriteMovie, removeFavoriteMovie } = useMovies();
+  const { setNewFavoriteMovie, removeFavoriteMovie, changeCurrentMovie } =
+    useMovies();
   const handleHeartClick = () =>
     isFavorite
       ? removeFavoriteMovie(episodeId)
       : setNewFavoriteMovie(episodeId);
 
   return (
-    <div className="border-b-2 border-starWars py-5 px-2 flex justify-between items-baseline cursor-pointer">
-      <span className="text-starWars text-sm select-none font-pollorOne font-bold block">
+    <div
+      className="border-b-2 border-starWars py-5 px-2 flex justify-between items-baseline cursor-pointer  hover:text-white transition-color transition duration-500 ease-in-out text-starWars"
+      onClick={() => changeCurrentMovie(episodeId)}
+    >
+      <span className="text-sm select-none font-pollorOne font-bold block">
         Star Wars: {title}
       </span>
       <span
-        className="text-white hover:transform hover:scale-110"
+        className="text-white transform hover:scale-110 transition duration-250 ease-in-out transition-transform"
         onClick={handleHeartClick}
       >
         {isFavorite ? "unHeart" : "Heart"}

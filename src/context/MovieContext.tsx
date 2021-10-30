@@ -52,10 +52,7 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
   /** Pushes new favorite movie to favoriteMovies state */
   const setNewFavoriteMovie = (episodeId: number) => {
     if (!episodeId) return;
-    setFavoriteMovies((prev) => {
-      prev.push({ episodeId });
-      return prev;
-    });
+    favoriteMovies.push({ episodeId });
     toggleUpdateLocalStorage();
   };
   /** Filters favoriteMovies array to remove movie  */

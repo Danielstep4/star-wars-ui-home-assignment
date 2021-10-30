@@ -3,7 +3,7 @@ import Sidebar from "../../components/Sidebar";
 
 const StartWars: React.FC = () => {
   return (
-    <main className="h-full w-full flex">
+    <main className="h-full w-full flex font-roboto">
       <Sidebar />
       <MovieDetails />
     </main>
