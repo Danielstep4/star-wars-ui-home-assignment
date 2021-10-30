@@ -10,6 +10,7 @@ module.exports = {
       fontFamily: {
         pollorOne: ["Poller One", "cursive"],
         roboto: ["Roboto", "sans-serif"],
+        gothicOne: ["Pathway Gothic One", "sans-serif"],
       },
     },
   },
