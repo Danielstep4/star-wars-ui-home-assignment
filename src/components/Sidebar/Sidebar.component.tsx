@@ -1,5 +1,6 @@
 import { useMovies } from "../../context/MovieContext";
 import { useToggler } from "../../hooks/useToggler";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const Sidebar: React.FC = () => {
   const { getAllMoviesNames } = useMovies();
@@ -54,18 +55,22 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
       : setNewFavoriteMovie(episodeId);
 
   return (
-    <div
-      className="border-b-2 border-starWars py-5 px-2 flex justify-between items-baseline cursor-pointer  hover:text-white transition-color transition duration-500 ease-in-out text-starWars"
-      onClick={() => changeCurrentMovie(episodeId)}
-    >
-      <span className="text-sm select-none font-pollorOne font-bold block">
+    <div className="border-b-2 border-starWars flex justify-between items-center cursor-pointer">
+      <span
+        className="text-sm select-none font-pollorOne font-bold block h-full w-full py-5 px-2 hover:text-white transition-color transition duration-500 ease-in-out text-starWars"
+        onClick={() => changeCurrentMovie(episodeId)}
+      >
         Star Wars: {title}
       </span>
       <span
-        className="text-white transform hover:scale-110 transition duration-250 ease-in-out transition-transform"
+        className="text-white transform hover:scale-125 transition duration-300 ease-in-out transition-transform py-1 px-2 text-2xl"
         onClick={handleHeartClick}
       >
-        {isFavorite ? "unHeart" : "Heart"}
+        {isFavorite ? (
+          <AiFillHeart className="text-red-500" />
+        ) : (
+          <AiOutlineHeart />
+        )}
       </span>
     </div>
   );
