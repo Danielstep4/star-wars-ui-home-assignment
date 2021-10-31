@@ -1,13 +1,15 @@
 import { useMovies } from "../../context/MovieContext";
-import { useToggler } from "../../hooks/useToggler";
 import { AiOutlineMenu } from "react-icons/ai";
 import { TiTimes } from "react-icons/ti";
 import SidebarMovieLink from "./SidebarMovieLink";
+import { useState } from "react";
 
 const Sidebar: React.FC = () => {
   const { getAllMoviesNames } = useMovies();
-  const [isMobileNavOpen, toggleMobileNav] = useToggler();
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
+  const toggleMobileNav = () => setIsMobileNavOpen((prev) => !prev);
+  const closeMobileNav = () => setIsMobileNavOpen(false);
   return (
     <>
       {!isMobileNavOpen && (
@@ -40,7 +42,7 @@ const Sidebar: React.FC = () => {
           <SidebarMovieLink
             {...movie}
             key={movie.episodeId}
-            toggleMobileNav={toggleMobileNav}
+            closeMobileNav={closeMobileNav}
           />
         ))}
       </aside>

@@ -6,7 +6,7 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
   episodeId,
   title,
   isFavorite,
-  toggleMobileNav,
+  closeMobileNav,
 }) => {
   const {
     setNewFavoriteMovie,
@@ -21,7 +21,7 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
 
   const handleChangeCurrentMovie = () => {
     changeCurrentMovie(episodeId);
-    toggleMobileNav();
+    closeMobileNav();
   };
 
   return (
@@ -55,5 +55,5 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
 export default SidebarMovieLink;
 
 interface SidebarMovieLinkProps extends MovieName {
-  toggleMobileNav: () => void;
+  closeMobileNav: () => void;
 }
