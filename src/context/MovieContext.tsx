@@ -1,4 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useToggler } from "../hooks/useToggler";
 
 // Init Context
@@ -14,31 +15,37 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
 }) => {
   // State
   const [favoriteMovies, setFavoriteMovies] = useState<FavoriteMovie[]>([]);
+  const [getCachedFavMovies, setCachedFavMovies] =
+    useLocalStorage<FavoriteMovie[]>("favoriteMovies");
   const [updateLocalStorage, toggleUpdateLocalStorage] = useToggler(false);
   const [currentMovie, setCurrentMovie] = useState<SwapiMoviesResult>(data[0]);
   // On load getting all favorite movies from local storage
   useEffect(() => {
-    const cachedData = localStorage.getItem("favoriteMovies");
-    if (cachedData) {
-      const cachedFavoriteMovies = JSON.parse(cachedData) as FavoriteMovie[];
-      if (Array.isArray(cachedFavoriteMovies)) {
-        setFavoriteMovies(cachedFavoriteMovies);
-        if (cachedFavoriteMovies[0]) {
+    const cachedFavMovies = getCachedFavMovies();
+    if (cachedFavMovies) {
+      if (Array.isArray(cachedFavMovies)) {
+        setFavoriteMovies(cachedFavMovies);
+        if (cachedFavMovies[0]) {
           setCurrentMovie(
-            _findOneMovieByEpisodeId(cachedFavoriteMovies[0].episodeId) ||
-              data[0]
+            _findOneMovieByEpisodeId(cachedFavMovies[0].episodeId) || data[0]
           );
         }
       }
     }
+    // eslint-disable-next-line
   }, []);
   /** Every time the user updates favorite Movies state the use effect will save it in localStorage */
   useEffect(() => {
     if (updateLocalStorage) {
-      localStorage.setItem("favoriteMovies", JSON.stringify(favoriteMovies));
+      setCachedFavMovies(favoriteMovies);
       toggleUpdateLocalStorage();
     }
-  }, [updateLocalStorage, favoriteMovies, toggleUpdateLocalStorage]);
+  }, [
+    updateLocalStorage,
+    favoriteMovies,
+    toggleUpdateLocalStorage,
+    setCachedFavMovies,
+  ]);
   // Helper functions
   /** Returns one movie by episode id or undefined */
   const _findOneMovieByEpisodeId = (episodeId: number) => {
