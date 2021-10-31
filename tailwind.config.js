@@ -14,6 +14,9 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
         gothicOne: ["Pathway Gothic One", "sans-serif"],
       },
+      screens: {
+        "2xl": "1600px",
+      },
     },
   },
   variants: {

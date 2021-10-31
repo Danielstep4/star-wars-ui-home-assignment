@@ -24,7 +24,9 @@ const Sidebar: React.FC = () => {
       )}
       <aside
         className={`min-h-screen max-h-screen overflow-y-auto overflow-x-hidden h-full flex flex-col bg-bgPrimary ${
-          isMobileNavOpen ? "w-screen absolute z-10" : "lg:block hidden w-1/3"
+          isMobileNavOpen
+            ? "w-screen absolute z-10"
+            : "lg:block hidden 2xl:w-1/4 w-1/3"
         }`}
       >
         {isMobileNavOpen && (
