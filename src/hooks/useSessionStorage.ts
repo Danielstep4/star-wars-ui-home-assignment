@@ -14,7 +14,7 @@ export function useSessionStorage<T>(
     return null;
   }, [key]);
   const setter = useCallback(
-    () => (data: T) => sessionStorage.setItem(key, JSON.stringify(data)),
+    (data: T) => sessionStorage.setItem(key, JSON.stringify(data)),
     [key]
   );
   return [getter, setter];

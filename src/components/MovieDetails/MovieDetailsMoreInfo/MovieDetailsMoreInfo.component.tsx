@@ -19,9 +19,11 @@ const MovieDetailsMoreInfo: React.FC = () => {
   // Onload effect extracts all the other details that are inside currentMovie
   useEffect(() => {
     const extractedUrlKeys = extractAllKeysForMoreDetails(currentMovie);
+    if (!activeKey) {
+      setActiveKey(extractedUrlKeys[0]);
+    }
     setUrlKeys(extractedUrlKeys);
-    setActiveKey(extractedUrlKeys[0]);
-  }, [currentMovie]);
+  }, [currentMovie, activeKey]);
   // Effect that triggers on active key change and current movie change
   // Resets the show more detail section
   // Starts the show more details handler
@@ -47,7 +49,6 @@ const MovieDetailsMoreInfo: React.FC = () => {
           setShowMoreDetail(fetchedData);
         }
       };
-
       showMoreDetailsHandler();
     }
   }, [
