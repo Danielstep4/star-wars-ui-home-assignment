@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 /** useToggler is a custom hook to help with toggle repeated functionality
  * @param {boolean} initialValue is flase
@@ -6,6 +6,6 @@ import { useState } from "react";
  */
 export const useToggler = (initialValue = false): [boolean, () => void] => {
   const [flag, setFlag] = useState(initialValue);
-  const toggler = () => setFlag((prev) => !prev);
+  const toggler = useCallback(() => setFlag((prev) => !prev), []);
   return [flag, toggler];
 };
