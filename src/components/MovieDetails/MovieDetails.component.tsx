@@ -1,7 +1,7 @@
 import bgImage from "../../assets/starwars-bg.jpg";
 import { useMovies } from "../../context/MovieContext";
 import { numToRoman } from "../../utils/numToRoman";
-import MovieDetailsMoreInfo from "../MovieDetailsMoreInfo";
+import MovieDetailsMoreInfo from "./MovieDetailsMoreInfo";
 
 const MovieDetails: React.FC = () => {
   const { currentMovie } = useMovies();

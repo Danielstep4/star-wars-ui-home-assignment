@@ -14,6 +14,9 @@ export const getAllMovies = async (): Promise<SwapiMoviesResult[]> => {
   }
 };
 
+/** Fetches all the data from the swapi by the urls array
+ * which contains all the url end points.
+ */
 export const fetchMovieDetails = async (urls: string[]): Promise<string[]> => {
   try {
     const results: string[] = [];
@@ -27,4 +30,21 @@ export const fetchMovieDetails = async (urls: string[]): Promise<string[]> => {
   } catch (e: any) {
     return axiosErrorHandler(e);
   }
+};
+
+/** Extracts all the keys  for more details that the app can fetch from swapi
+ * Function iterates on all the keys and finds only the string arrays with the needed urls
+ */
+export const extractAllKeysForMoreDetails = (
+  currentMovie: SwapiMoviesResult
+) => {
+  const urlKeys: (keyof SwapiMoviesResult)[] = [];
+  const allKeys = Object.keys(currentMovie) as (keyof SwapiMoviesResult)[];
+  for (let key of allKeys) {
+    if (Array.isArray(currentMovie[key])) {
+      const array = currentMovie[key] as string[];
+      if (array[0].includes("https")) urlKeys.push(key);
+    }
+  }
+  return urlKeys;
 };
