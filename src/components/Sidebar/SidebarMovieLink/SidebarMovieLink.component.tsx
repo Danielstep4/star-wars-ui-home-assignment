@@ -8,12 +8,14 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
   isFavorite,
   closeMobileNav,
 }) => {
+  //State
   const {
     setNewFavoriteMovie,
     removeFavoriteMovie,
     changeCurrentMovie,
     currentMovie,
   } = useMovies();
+  // Helpers
   const handleHeartClick = () =>
     isFavorite
       ? removeFavoriteMovie(episodeId)
