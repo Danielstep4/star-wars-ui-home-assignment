@@ -27,13 +27,14 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
         setFavoriteMovies(cachedFavMovies);
         if (cachedFavMovies[0]) {
           setCurrentMovie(
-            _findOneMovieByEpisodeId(cachedFavMovies[0].episodeId) || data[0]
+            data.find(
+              (movie) => movie.episode_id === cachedFavMovies[0].episodeId
+            ) || data[0]
           );
         }
       }
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [data, getCachedFavMovies]);
   /** Every time the user updates favorite Movies state the use effect will save it in localStorage */
   useEffect(() => {
     if (updateLocalStorage) {

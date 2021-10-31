@@ -4,18 +4,33 @@ import MoviesContextProvider from "./context/MovieContext";
 import StarWars from "./pages/star-wars";
 import { getAllMovies } from "./services/Movies.service";
 import bgImage from "./assets/starwars-bg.jpg";
+import { useSessionStorage } from "./hooks/useSessionStorage";
 
 const App: React.FC = () => {
+  // Global State
   const [allMovies, setAllMovies] = useState<SwapiMoviesResult[]>([]);
+  const [getCachedAllMovies, setCachedAllMovies] =
+    useSessionStorage<SwapiMoviesResult[]>("all_movies");
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
+  // Onload populating allMovies state
   useEffect(() => {
-    getAllMovies()
-      .then(setAllMovies)
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
-  }, []);
+    const _onLoadInit = async () => {
+      const cachedAllMovies = getCachedAllMovies();
+      if (cachedAllMovies) {
+        setAllMovies(cachedAllMovies);
+      } else {
+        try {
+          const result = await getAllMovies();
+          setAllMovies(result);
+          setCachedAllMovies(result);
+        } catch (e) {
+          setIsError(true);
+        }
+      }
+    };
+    _onLoadInit().finally(() => setIsLoading(false));
+  }, [getCachedAllMovies, setCachedAllMovies]);
 
   if (isLoading)
     return (

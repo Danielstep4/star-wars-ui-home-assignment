@@ -35,7 +35,7 @@ const MovieDetails: React.FC = () => {
               {currentMovie.producer}
             </span>
           </div>
-          <p className="text-3xl font-bold text-starWars text-center font-gothicOne">
+          <p className="text-3xl font-bold text-starWars text-left font-gothicOne">
             {currentMovie.opening_crawl}
           </p>
           <MovieDetailsMoreInfo />

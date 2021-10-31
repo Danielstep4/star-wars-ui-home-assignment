@@ -21,16 +21,41 @@ const MovieDetailsMoreInfo: React.FC = () => {
     const extractedUrlKeys = extractAllKeysForMoreDetails(currentMovie);
     setUrlKeys(extractedUrlKeys);
     setActiveKey(extractedUrlKeys[0]);
-  }, []);
+  }, [currentMovie]);
   // Effect that triggers on active key change and current movie change
   // Resets the show more detail section
   // Starts the show more details handler
   useEffect(() => {
     if (activeKey) {
       resetShowMoreDetail();
+      /** Function fetches the current active key info from swapi and set the showMoreDetail state */
+      const showMoreDetailsHandler = async () => {
+        if (activeKey && currentMovie.hasOwnProperty(activeKey)) {
+          const currentMovieDetail = currentMovie[activeKey] as string[];
+          const cachedInfo = getCurrentMovieCachedInfo();
+          let fetchedData: string[];
+          if (cachedInfo && cachedInfo.hasOwnProperty(activeKey)) {
+            fetchedData = cachedInfo[activeKey] as string[];
+          } else {
+            fetchedData = await fetchMovieDetails(currentMovieDetail);
+            /// @ts-ignore
+            setCurrentMovieCachedInfo({
+              ...cachedInfo,
+              [activeKey]: fetchedData,
+            });
+          }
+          setShowMoreDetail(fetchedData);
+        }
+      };
+
       showMoreDetailsHandler();
     }
-  }, [activeKey, currentMovie]);
+  }, [
+    activeKey,
+    currentMovie,
+    getCurrentMovieCachedInfo,
+    setCurrentMovieCachedInfo,
+  ]);
   // Effect that triggers on show more detail state change
   // and changes the is loading state
   useEffect(() => {
@@ -39,23 +64,6 @@ const MovieDetailsMoreInfo: React.FC = () => {
   }, [showMoreDetail]);
   /**Resets the show more detail state */
   const resetShowMoreDetail = () => setShowMoreDetail([]);
-  /** Function fetches the current active key info from swapi and set the showMoreDetail state */
-  const showMoreDetailsHandler = async () => {
-    if (activeKey && currentMovie.hasOwnProperty(activeKey)) {
-      const currentMovieDetail = currentMovie[activeKey] as string[];
-      const cachedInfo = getCurrentMovieCachedInfo();
-      let fetchedData: string[];
-      if (cachedInfo && cachedInfo.hasOwnProperty(activeKey)) {
-        fetchedData = cachedInfo[activeKey] as string[];
-      } else {
-        fetchedData = await fetchMovieDetails(currentMovieDetail);
-        // #TODO fix this
-        /// @ts-ignore
-        setCurrentMovieCachedInfo({ ...cachedInfo, [activeKey]: fetchedData });
-      }
-      setShowMoreDetail(fetchedData);
-    }
-  };
 
   return (
     <div className="w-full">
