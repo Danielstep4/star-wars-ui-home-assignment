@@ -30,7 +30,7 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
     <div className="mx-1 lg:mx-0 border-starWars flex justify-between items-center cursor-pointer transform transtion-all scale-95 hover:scale-100 ease-in-out duration-300 my-2">
       <span
         className={
-          "text-2xl select-none font-gothicOne font-bold block h-full w-full py-5 px-2 hover:text-white transition-color transition duration-400 ease-in-out" +
+          "text-2xl select-none font-gothicOne font-bold block h-full w-full py-5 px-2 hover:text-starWarsLight transition-color transition duration-400 ease-in-out" +
           " " +
           (currentMovie.episode_id === episodeId
             ? "text-white"

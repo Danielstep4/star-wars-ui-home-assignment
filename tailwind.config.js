@@ -6,6 +6,8 @@ module.exports = {
       colors: {
         starWars: "#FFE81F",
         bgPrimary: "#0E1111",
+        starWarsDark: "#8f8000",
+        starWarsLight: "#fef38f",
       },
       fontFamily: {
         pollorOne: ["Poller One", "cursive"],
