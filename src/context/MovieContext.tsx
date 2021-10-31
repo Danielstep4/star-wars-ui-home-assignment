@@ -18,11 +18,18 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
   const [currentMovie, setCurrentMovie] = useState<SwapiMoviesResult>(data[0]);
   // On load getting all favorite movies from local storage
   useEffect(() => {
-    const data = localStorage.getItem("favoriteMovies");
-    if (data) {
-      const cachedFavoriteMovies = JSON.parse(data);
-      if (Array.isArray(cachedFavoriteMovies))
+    const cachedData = localStorage.getItem("favoriteMovies");
+    if (cachedData) {
+      const cachedFavoriteMovies = JSON.parse(cachedData) as FavoriteMovie[];
+      if (Array.isArray(cachedFavoriteMovies)) {
         setFavoriteMovies(cachedFavoriteMovies);
+        if (cachedFavoriteMovies[0]) {
+          setCurrentMovie(
+            _findOneMovieByEpisodeId(cachedFavoriteMovies[0].episodeId) ||
+              data[0]
+          );
+        }
+      }
     }
   }, []);
   /** Every time the user updates favorite Movies state the use effect will save it in localStorage */
