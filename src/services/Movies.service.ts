@@ -13,3 +13,18 @@ export const getAllMovies = async (): Promise<SwapiMoviesResult[]> => {
     return axiosErrorHandler(e);
   }
 };
+
+export const fetchMovieDetails = async (urls: string[]): Promise<string[]> => {
+  try {
+    const results: string[] = [];
+    for (let url of urls) {
+      const response = await axios.get(url);
+      if (response.data && response.data.name) {
+        results.push(response.data.name);
+      }
+    }
+    return results;
+  } catch (e: any) {
+    return axiosErrorHandler(e);
+  }
+};

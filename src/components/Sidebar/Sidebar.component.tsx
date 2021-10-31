@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
         </button>
       )}
       <aside
-        className={`min-h-screen max-h-screen overflow-y-auto h-full flex flex-col bg-bgPrimary ${
+        className={`min-h-screen max-h-screen overflow-y-auto overflow-x-hidden h-full flex flex-col bg-bgPrimary ${
           isMobileNavOpen ? "w-screen absolute" : "lg:block hidden w-1/3"
         }`}
       >
