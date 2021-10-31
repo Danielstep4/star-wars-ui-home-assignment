@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const numToRoman = (num: number): string => {
   let numeral = "";
   const romanObjects = [
@@ -28,3 +29,4 @@ export const numToRoman = (num: number): string => {
   }
   return numeral;
 };
+/* eslint-enable */
