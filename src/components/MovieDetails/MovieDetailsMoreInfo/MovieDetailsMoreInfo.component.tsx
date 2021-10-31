@@ -5,6 +5,7 @@ import {
   fetchMovieDetails,
   extractAllKeysForMoreDetails,
 } from "../../../services/Movies.service";
+import Loading from "../../Loading";
 
 const MovieDetailsMoreInfo: React.FC = () => {
   // State
@@ -55,6 +56,7 @@ const MovieDetailsMoreInfo: React.FC = () => {
       setShowMoreDetail(fetchedData);
     }
   };
+
   return (
     <div className="w-full">
       <hr className="border-starWars my-5 w-full" />
@@ -78,15 +80,17 @@ const MovieDetailsMoreInfo: React.FC = () => {
         ))}
       </div>
       <hr className="border-starWars my-5" />
-      <div className="grid lg:grid-rows-6 gap-2 lg:grid-flow-col grid-cols-2 lg:text-left">
-        {isLoading
-          ? "Loading..."
-          : showMoreDetail.map((name) => (
-              <span className="text-xl" key={name}>
-                {name}
-              </span>
-            ))}
-      </div>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="grid lg:grid-rows-6 gap-2 lg:grid-flow-col lg:auto-cols-auto grid-cols-2 lg:text-left">
+          {showMoreDetail.map((name) => (
+            <span className="text-xl" key={name}>
+              {name}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
