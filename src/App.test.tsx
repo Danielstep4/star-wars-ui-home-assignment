@@ -1,7 +1,7 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-// TODO
-test("", () => {
-  expect("").toBe("");
+
+test("the loading component should be the first to render", () => {
+  render(<App />);
+  expect(screen.getByRole("loader")).toBeInTheDocument();
 });

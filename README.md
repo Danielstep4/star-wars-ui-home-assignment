@@ -8,7 +8,7 @@ To get a local copy up and running follow these steps.
 ### Prerequisites
 Make sure you have installed all of the following prerequisites on your development machine:
 * Node.js
-* Docker
+* Docker (optional)
 
 ### Cloning The GitHub Repository
 
@@ -20,14 +20,21 @@ cd star-wars-ui-home-assignment
 
 <hr>
 
-## Building Docker container 
+## Running your Application with npm
+
+```sh
+npm i && npm start
+```
+
+<hr>
+
+## Building Docker image 
 
 ```sh
 docker build -t star-wars-ui . 
 ```
-## Running Your Application 
+## Running your Application with Docker
 
-start the app server:
 
 ```sh
 docker run -d -p 3000:3000 star-wars-ui
@@ -36,7 +43,7 @@ docker run -d -p 3000:3000 star-wars-ui
 # Usage 
 - Once the app is up and running the user interface will be exposed to port 3000
 
-<hr>
 
-## Basic Design Link
+
+# Basic Design Link
 [Basic Design](https://www.figma.com/file/iyWZ2Go3uSMo2sb5fMYf7j/Star-Wars-UI-Desi?node-id=0%3A1)
