@@ -19,6 +19,7 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
     useLocalStorage<FavoriteMovie[]>("favoriteMovies");
   const [updateLocalStorage, toggleUpdateLocalStorage] = useToggler(false);
   const [currentMovie, setCurrentMovie] = useState<SwapiMoviesResult>(data[0]);
+
   // On load getting all favorite movies from local storage
   useEffect(() => {
     const cachedFavMovies = getCachedFavMovies();
@@ -35,6 +36,7 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
       }
     }
   }, [data, getCachedFavMovies]);
+
   /** Every time the user updates favorite Movies state the use effect will save it in localStorage */
   useEffect(() => {
     if (updateLocalStorage) {
@@ -47,11 +49,13 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
     toggleUpdateLocalStorage,
     setCachedFavMovies,
   ]);
+
   // Helper functions
   /** Returns one movie by episode id or undefined */
   const _findOneMovieByEpisodeId = (episodeId: number) => {
     return data.find((movie) => movie.episode_id === episodeId);
   };
+
   /** Returns all movies from data prop sorted by episode id */
   const getAllMoviesNames = () => {
     const allMoviesNames: MovieName[] = data.map((movie) => ({
@@ -64,12 +68,14 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
     allMoviesNames.sort((a, b) => a.episodeId - b.episodeId);
     return allMoviesNames;
   };
+
   /** Pushes new favorite movie to favoriteMovies state */
   const setNewFavoriteMovie = (episodeId: number) => {
     if (!episodeId) return;
     favoriteMovies.push({ episodeId });
     toggleUpdateLocalStorage();
   };
+
   /** Filters favoriteMovies array to remove movie  */
   const removeFavoriteMovie = (episodeId: number) => {
     if (!episodeId) return;
@@ -78,12 +84,14 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
     );
     toggleUpdateLocalStorage();
   };
+
   /** Changes the current movie state to be the selected movie if it exists */
   const changeCurrentMovie = (episodeId: number) => {
     if (!episodeId) return;
     const selectedMovie = _findOneMovieByEpisodeId(episodeId);
     if (selectedMovie) setCurrentMovie(selectedMovie);
   };
+
   // Value
   const value: MoviesValue = {
     currentMovie,
@@ -92,6 +100,7 @@ const MoviesContextProvider: React.FC<MoviesProviderProps> = ({
     setNewFavoriteMovie,
     removeFavoriteMovie,
   };
+
   // Provider
   return (
     <MoviesContext.Provider value={value}>{children}</MoviesContext.Provider>

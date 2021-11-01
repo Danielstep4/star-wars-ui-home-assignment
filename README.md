@@ -1,6 +1,6 @@
 # Star Wars User Interface Home Assignment 
 
-[![ezgif.com-gif-maker9684f8142dc3a657.gif](https://s9.gifyu.com/images/ezgif.com-gif-maker9684f8142dc3a657.gif)](https://gifyu.com/image/eaI7)
+![DEMO](https://s9.gifyu.com/images/ezgif.com-gif-maker9684f8142dc3a657.gif)
 
 ## Getting Started
 To get a local copy up and running follow these steps.

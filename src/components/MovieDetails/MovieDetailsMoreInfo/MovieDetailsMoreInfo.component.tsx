@@ -16,7 +16,8 @@ const MovieDetailsMoreInfo: React.FC = () => {
   const [activeKey, setActiveKey] = useState<keyof SwapiMoviesResult>();
   const [showMoreDetail, setShowMoreDetail] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // Onload effect extracts all the other details that are inside currentMovie
+
+  // extracts all the other details that are inside currentMovie
   useEffect(() => {
     const extractedUrlKeys = extractAllKeysForMoreDetails(currentMovie);
     if (!activeKey) {
@@ -24,9 +25,10 @@ const MovieDetailsMoreInfo: React.FC = () => {
     }
     setUrlKeys(extractedUrlKeys);
   }, [currentMovie, activeKey]);
-  // Effect that triggers on active key change and current movie change
-  // Resets the show more detail section
-  // Starts the show more details handler
+
+  /* Effect that triggers on active key change and current movie change
+    Resets the show more detail section
+    Starts the show more details handler */
   useEffect(() => {
     if (activeKey) {
       resetShowMoreDetail();
@@ -57,12 +59,14 @@ const MovieDetailsMoreInfo: React.FC = () => {
     getCurrentMovieCachedInfo,
     setCurrentMovieCachedInfo,
   ]);
-  // Effect that triggers on show more detail state change
-  // and changes the is loading state
+
+  /* Effect that triggers on show more detail state change
+   and changes the is loading state */
   useEffect(() => {
     if (showMoreDetail.length === 0) setIsLoading(true);
     else if (showMoreDetail.length > 1) setIsLoading(false);
   }, [showMoreDetail]);
+
   /**Resets the show more detail state */
   const resetShowMoreDetail = () => setShowMoreDetail([]);
 

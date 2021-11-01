@@ -8,6 +8,7 @@ const Sidebar: React.FC = () => {
   //State
   const { getAllMoviesNames } = useMovies();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
   //Helpers
   const toggleMobileNav = () => setIsMobileNavOpen((prev) => !prev);
   const closeMobileNav = () => setIsMobileNavOpen(false);

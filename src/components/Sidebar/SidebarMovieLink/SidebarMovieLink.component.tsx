@@ -15,6 +15,7 @@ const SidebarMovieLink: React.FC<SidebarMovieLinkProps> = ({
     changeCurrentMovie,
     currentMovie,
   } = useMovies();
+
   // Helpers
   const handleHeartClick = () =>
     isFavorite
